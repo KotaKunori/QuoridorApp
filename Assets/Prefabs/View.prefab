@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7716257784971299171
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2275630629427783237}
+  - component: {fileID: 7882915087574951135}
+  m_Layer: 0
+  m_Name: View
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2275630629427783237
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7716257784971299171}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7882915087574951135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7716257784971299171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa6210d81e2ba96489a4deae19d2c695, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameController: {fileID: 0}
+  plane: {fileID: 5943198393697500769, guid: a4e6d768016e357478f45ba8fc097e8a, type: 3}
+  hWall: {fileID: 1024436262126858962, guid: 63d1d0bf03b7f6b4e9cf4e2a1f216333, type: 3}
+  vWall: {fileID: 5421055772478019558, guid: 7e376d1373e562747ad35b529fed8994, type: 3}
+  player1Prefab: {fileID: 1263100886573035837, guid: 5ac6c6d0404e1ce4387918a02bf7b46d, type: 3}
+  player2Prefab: {fileID: 134770258679974238, guid: 246e5f9da577f574fa0d854434c03931, type: 3}
+  treasureBoxPrefab: {fileID: 4769904834505199078, guid: ce7a5dcee0e167a4b977084aa96f23d7, type: 3}
+  lightLinePrefab: {fileID: 1960958682135079301, guid: 48d90c633c4b1864790a05b8aa781aad, type: 3}

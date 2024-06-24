@@ -4,6 +4,17 @@ using System.Collections.Generic;
 namespace TreasureHunting
 {
     /// <summary>
+    /// ゲームの進行状況を表す値
+    /// </summary>
+    public enum Fases
+    {
+        standby,
+        wallSetting,
+        search,
+        end
+    }
+
+    /// <summary>
     /// プレーヤーを識別する値
     /// </summary>
     public enum Players 
@@ -98,6 +109,10 @@ namespace TreasureHunting
         /// 空いているマス
         /// </summary>
         space,
+        /// <summary>
+        ///壁
+        /// </summary>
+        wall,
         /// <summary>
         ///味方の置いた壁
         /// </summary>
@@ -208,7 +223,11 @@ namespace TreasureHunting
             }
             state[9, 17] = (int)StateAtrribute.player1;//プレーヤー１の初期状態を設定
             state[9, 1] = (int)StateAtrribute.player2;//プレーヤー２の初期状態を設定
-            state[9, 9] = (int)StateAtrribute.treasure;//お宝の初期状態を設定、ここランダムで配置できるようにしたい
+
+            System.Random rand = new System.Random();
+            int treasureX = rand.Next(9) * 2 + 1;
+            int treasureY = rand.Next(2, 7) * 2 + 1;
+            state[treasureX, treasureY] = (int)StateAtrribute.treasure;//お宝の初期状態を設定、ここランダムで配置できるようにしたい
         }
 
         public int[, ] getState()
@@ -232,6 +251,11 @@ namespace TreasureHunting
         public VisibleState()
         {
             state = new int[4];
+        }
+
+        public int[] getVisibleState()
+        {
+            return state;
         }
 
         public void setVisibleState(int[] state)

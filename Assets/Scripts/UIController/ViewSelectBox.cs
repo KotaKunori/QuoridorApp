@@ -7,7 +7,7 @@ namespace TreasureHunting
 {
     public class ViewSelectBox : MonoBehaviour
     {
-        public View view;
+        View view;
         public Dropdown dropdown;
 
         private void Start()

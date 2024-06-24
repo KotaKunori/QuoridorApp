@@ -18,6 +18,73 @@ namespace TreasureHunting
             this.board = board;
         }
 
+        private bool listContains(Position targetPosition, List<Position> targetList)
+        {
+            foreach (Position position in targetList)
+            {
+                if (position == targetPosition)
+                {
+
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool existRoot(int[, ] state, Position startPosition, Position endPosition)
+        {
+            List<Position> exploreList = new List<Position>();
+            List<Position> exploredList = new List<Position>();
+
+            exploreList.Add(startPosition);
+            while(exploreList.Count != 0)
+            {
+                Position currentPosition = exploreList[0];
+                exploreList.Remove(currentPosition);
+
+                if(currentPosition == endPosition)
+                {
+                    return true;
+                }
+
+                exploredList.Add(currentPosition);
+
+                if(currentPosition.x != 1 && state[currentPosition.x - 1, currentPosition.y] == 0)
+                {
+                    Position targetPosition = new Position(currentPosition.x - 2, currentPosition.y);
+                    if (!listContains(targetPosition, exploreList) && !listContains(targetPosition, exploredList))
+                    {
+                        exploreList.Add(targetPosition);
+                    }
+                }
+                if (currentPosition.x != 17 && state[currentPosition.x + 1, currentPosition.y] == 0)
+                {
+                    Position targetPosition = new Position(currentPosition.x + 2, currentPosition.y);
+                    if (!listContains(targetPosition, exploreList) && !listContains(targetPosition, exploredList))
+                    {
+                        exploreList.Add(targetPosition);
+                    }
+                }
+                if (currentPosition.y != 1 && state[currentPosition.x, currentPosition.y - 1] == 0)
+                {
+                    Position targetPosition = new Position(currentPosition.x, currentPosition.y - 2);
+                    if (!listContains(targetPosition, exploreList) && !listContains(targetPosition, exploredList))
+                    {
+                        exploreList.Add(targetPosition);
+                    }
+                }
+                if (currentPosition.y != 17 && state[currentPosition.x, currentPosition.y + 1] == 0)
+                {
+                    Position targetPosition = new Position(currentPosition.x, currentPosition.y + 2);
+                    if (!listContains(targetPosition, exploreList) && !listContains(targetPosition, exploredList))
+                    {
+                        exploreList.Add(targetPosition);
+                    }
+                }
+            }
+            return false;
+        }
+
         /// <summary>
         /// ???????u?????\?????????????????\?b?h
         /// </summary>
@@ -25,607 +92,52 @@ namespace TreasureHunting
         /// <returns>???????u???\????????</returns>
         public bool wallSettingEnable(Wall wall)
         {
-            State stateClass = board.getState();
-            int[,] state;
-            state = new int[19, 19];
-            state = stateClass.getState();
+            State stateHolder = board.getState();
+            int[,] state = stateHolder.getState();
 
             Position ptop = wall.wallTop;
             Position pcenter = wall.center;
             Position pbottom = wall.wallBottom;
 
-            if (pcenter.x == ptop.x && pcenter.x == pbottom.x) //x???W??????????(?c)
+            if(!((ptop.x == pcenter.x - 1 && pbottom.x == pcenter.x + 1 && ptop.y == pcenter.y && pbottom.y == pcenter.y)
+                || (ptop.y == pcenter.y - 1 && pbottom.y == pcenter.y + 1 && ptop.x == pcenter.x && pbottom.x == pcenter.x)))
             {
-                if ((pcenter.x % 2) == 0)  //x???W??????
-                {
-                    if ((pcenter.y % 2) != 0)  //center??y???W?????????O??false
-                        return false;
-                }
-                else
-                    return false;
-            }
-            else if (pcenter.y == ptop.y && pcenter.y == pbottom.y) //y???W??????????(??)
-            {
-                if ((pcenter.x % 2) == 0)  //y???W??????
-                {
-                    if (pcenter.y % 2 != 0) //center??x???W?????????O??false
-                        return false;
-                   
-                }
-                else
-                    return false;
-            }
-            else //x??y?????????W?????????????????????_??
                 return false;
-
-            if (state[ptop.x, ptop.y] == 1 || state[ptop.x, ptop.y] == 2 || state[ptop.x, ptop.y] == 3 || state[pcenter.x, pcenter.y] == 1 || state[pcenter.x, pcenter.y] == 2 || state[pcenter.x, pcenter.y] == 3 || state[pbottom.x, pbottom.y] == 1 || state[pbottom.x, pbottom.y] == 2 || state[pbottom.x, pbottom.y] == 3) //?????????u??????????
-                return false;
-
-            //???H????
-
-            Stack<Position> cycle = new Stack<Position>();
-            Stack<Position> duplicate = new Stack<Position>();
-
-            Position instance;
-
-            cycle.Push(ptop); //ptop?????W??cycle?????[
-
-            int counting = 0;
-
-            while (cycle.Count > 0)
+            }
+            if(pcenter.x % 2 != 0 || pcenter.y % 2 != 0)
             {
-                Position val = cycle.Pop(); //cycle?????????o??
-                counting++;
-                if (counting > 35)
-                    break;
-
-                duplicate.Push(val); //duplicate?????[
-
-                if ((val.x % 2) == 0) //val??x???W????????????
-                {
-                    if (val.y > 1)
-                    {
-                        if (state[val.x, val.y - 2] == 1 || state[val.x, val.y - 2] == 2 || state[val.x, val.y - 2] == 3)
-                        {
-                            instance.x = val.x;
-                            instance.y = val.y - 2;
-                            if (cycle.Contains(instance))
-                            {
-                                return false;
-                            }
-                            if (duplicate.Contains(instance))
-                            {
-
-                            }
-                            else
-                            {
-                                cycle.Push(instance);
-                            }
-
-                        }
-                    }
-
-                    if (val.y < 17)
-                    {
-                        if (state[val.x, val.y + 2] == 1 || state[val.x, val.y + 2] == 2 || state[val.x, val.y + 2] == 3)
-                        {
-                            instance.x = val.x;
-                            instance.y = val.y + 2;
-                            if (cycle.Contains(instance))
-                            {
-                                return false;
-                            }
-                            if (duplicate.Contains(instance))
-                            {
-
-                            }
-                            else
-                            {
-                                cycle.Push(instance);
-                            }
-                        }
-                    }
-
-                    if (val.x < 18 && val.y < 18)
-                    {
-                        if (state[val.x + 1, val.y + 1] == 1 || state[val.x + 1, val.y + 1] == 2 || state[val.x + 1, val.y + 1] == 3)
-                        {
-                            instance.x = val.x + 1;
-                            instance.y = val.y + 1;
-                            if (cycle.Contains(instance))
-                            {
-                                return false;
-                            }
-                            if (duplicate.Contains(instance))
-                            {
-
-                            }
-                            else
-                            {
-                                cycle.Push(instance);
-                            }
-                        }
-                    }
-
-                    if (val.x < 18 && val.y > 0)
-                    {
-                        if (state[val.x + 1, val.y - 1] == 1 || state[val.x + 1, val.y - 1] == 2 || state[val.x + 1, val.y - 1] == 3)
-                        {
-                            instance.x = val.x + 1;
-                            instance.y = val.y - 1;
-                            if (cycle.Contains(instance))
-                            {
-                                return false;
-                            }
-                            if (duplicate.Contains(instance))
-                            {
-
-                            }
-                            else
-                            {
-                                cycle.Push(instance);
-                            }
-                        }
-                    }
-
-                    if (val.x > 0 && val.y < 18)
-                    {
-                        if (state[val.x - 1, val.y + 1] == 1 || state[val.x - 1, val.y + 1] == 2 || state[val.x - 1, val.y + 1] == 3)
-                        {
-                            instance.x = val.x - 1;
-                            instance.y = val.y + 1;
-                            if (cycle.Contains(instance))
-                            {
-                                return false;
-                            }
-                            if (duplicate.Contains(instance))
-                            {
-
-                            }
-                            else
-                            {
-                                cycle.Push(instance);
-                            }
-                        }
-                    }
-
-                    if (val.x > 0 && val.y > 0)
-                    {
-                        if (state[val.x - 1, val.y - 1] == 1 || state[val.x - 1, val.y - 1] == 2 || state[val.x - 1, val.y - 1] == 3)
-                        {
-                            instance.x = val.x - 1;
-                            instance.y = val.y - 1;
-                            if (cycle.Contains(instance))
-                            {
-                                return false;
-                            }
-                            if (duplicate.Contains(instance))
-                            {
-
-                            }
-                            else
-                            {
-                                cycle.Push(instance);
-                            }
-                        }
-                    }
-
-                }
-
-                else if ((val.x % 2) == 1) //val??x???W????????????
-                {
-                    if (val.x > 1)
-                    {
-                        if (state[val.x - 2, val.y] == 1 || state[val.x - 2, val.y] == 2 || state[val.x - 2, val.y] == 3)
-                        {
-                            instance.x = val.x - 2;
-                            instance.y = val.y;
-                            if (cycle.Contains(instance))
-                            {
-                                return false;
-                            }
-                            if (duplicate.Contains(instance))
-                            {
-
-                            }
-                            else
-                            {
-                                cycle.Push(instance);
-                            }
-
-                        }
-                    }
-
-                    if (val.x < 17)
-                    {
-                        if (state[val.x + 2, val.y] == 1 || state[val.x + 2, val.y] == 2 || state[val.x + 2, val.y] == 3)
-                        {
-                            instance.x = val.x + 2;
-                            instance.y = val.y;
-                            if (cycle.Contains(instance))
-                            {
-                                return false;
-                            }
-                            if (duplicate.Contains(instance))
-                            {
-
-                            }
-                            else
-                            {
-                                cycle.Push(instance);
-                            }
-                        }
-                    }
-
-                    if (val.x < 18 && val.y < 18)
-                    {
-                        if (state[val.x + 1, val.y + 1] == 1 || state[val.x + 1, val.y + 1] == 2 || state[val.x + 1, val.y + 1] == 3)
-                        {
-                            instance.x = val.x + 1;
-                            instance.y = val.y + 1;
-                            if (cycle.Contains(instance))
-                            {
-                                return false;
-                            }
-                            if (duplicate.Contains(instance))
-                            {
-
-                            }
-                            else
-                            {
-                                cycle.Push(instance);
-                            }
-                        }
-                    }
-
-                    if (val.x < 18 && val.y > 0)
-                    {
-                        if (state[val.x + 1, val.y - 1] == 1 || state[val.x + 1, val.y - 1] == 2 || state[val.x + 1, val.y - 1] == 3)
-                        {
-                            instance.x = val.x + 1;
-                            instance.y = val.y - 1;
-                            if (cycle.Contains(instance))
-                            {
-                                return false;
-                            }
-                            if (duplicate.Contains(instance))
-                            {
-
-                            }
-                            else
-                            {
-                                cycle.Push(instance);
-                            }
-                        }
-                    }
-
-                    if (val.x > 0 && val.y < 18)
-                    {
-                        if (state[val.x - 1, val.y + 1] == 1 || state[val.x - 1, val.y + 1] == 2 || state[val.x - 1, val.y + 1] == 3)
-                        {
-                            instance.x = val.x - 1;
-                            instance.y = val.y + 1;
-                            if (cycle.Contains(instance))
-                            {
-                                return false;
-                            }
-                            if (duplicate.Contains(instance))
-                            {
-
-                            }
-                            else
-                            {
-                                cycle.Push(instance);
-                            }
-                        }
-                    }
-
-                    if (val.x > 0 && val.y > 0)
-                    {
-                        if (state[val.x - 1, val.y - 1] == 1 || state[val.x - 1, val.y - 1] == 2 || state[val.x - 1, val.y - 1] == 3)
-                        {
-                            instance.x = val.x - 1;
-                            instance.y = val.y - 1;
-                            if (cycle.Contains(instance))
-                            {
-                                return false;
-                            }
-                            if (duplicate.Contains(instance))
-                            {
-
-                            }
-                            else
-                            {
-                                cycle.Push(instance);
-                            }
-                        }
-                    }
-
-                }
-
+                return false;
             }
 
-            cycle.Clear();
-            duplicate.Clear();
-            counting = 0;
-
-            cycle.Push(pbottom); //pbottom?????W??cycle?????[
-
-            while (cycle.Count > 0)
+            if(pcenter.x < 2 || pcenter.y < 2 || pcenter.x > 16 || pcenter.y > 16)
             {
-                Position val = cycle.Pop(); //cycle?????????o??
-                counting++;
-                if (counting > 35)
-                    break;
+                return false;
+            }
 
-                duplicate.Push(val); //duplicate?????[
+            if(state[pcenter.x, pcenter.y] != (int) StateAtrribute.space || state[ptop.x, ptop.y] != (int)StateAtrribute.space
+                || state[pbottom.x, pbottom.y] != (int)StateAtrribute.space)
+            {
+                return false;
+            }
 
-                if ((val.x % 2) == 0) //val??x???W????????????
-                {
-                    if (val.y > 1)
-                    {
-                        if (state[val.x, val.y - 2] == 1 || state[val.x, val.y - 2] == 2 || state[val.x, val.y - 2] == 3)
-                        {
-                            instance.x = val.x;
-                            instance.y = val.y - 2;
-                            if (cycle.Contains(instance))
-                            {
-                                return false;
-                            }
-                            if (duplicate.Contains(instance))
-                            {
+            state[ptop.x, ptop.y] = (int)StateAtrribute.wall;
+            state[pcenter.x, pcenter.y] = (int)StateAtrribute.wall;
+            state[pbottom.x, pbottom.y] = (int)StateAtrribute.wall;
 
-                            }
-                            else
-                            {
-                                cycle.Push(instance);
-                            }
+            Position player1Position = board.getPlayerPosition(Players.player1);
+            Position player2Position = board.getPlayerPosition(Players.player2);
+            Position treasurePosition = board.getTreasurePosition();
 
-                        }
-                    }
-
-                    if (val.y < 17)
-                    {
-                        if (state[val.x, val.y + 2] == 1 || state[val.x, val.y + 2] == 2 || state[val.x, val.y + 2] == 3)
-                        {
-                            instance.x = val.x;
-                            instance.y = val.y + 2;
-                            if (cycle.Contains(instance))
-                            {
-                                return false;
-                            }
-                            if (duplicate.Contains(instance))
-                            {
-
-                            }
-                            else
-                            {
-                                cycle.Push(instance);
-                            }
-                        }
-                    }
-
-                    if (val.x < 18 && val.y < 18)
-                    {
-                        if (state[val.x + 1, val.y + 1] == 1 || state[val.x + 1, val.y + 1] == 2 || state[val.x + 1, val.y + 1] == 3)
-                        {
-                            instance.x = val.x + 1;
-                            instance.y = val.y + 1;
-                            if (cycle.Contains(instance))
-                            {
-                                return false;
-                            }
-                            if (duplicate.Contains(instance))
-                            {
-
-                            }
-                            else
-                            {
-                                cycle.Push(instance);
-                            }
-                        }
-                    }
-
-                    if (val.x < 18 && val.y > 0)
-                    {
-                        if (state[val.x + 1, val.y - 1] == 1 || state[val.x + 1, val.y - 1] == 2 || state[val.x + 1, val.y - 1] == 3)
-                        {
-                            instance.x = val.x + 1;
-                            instance.y = val.y - 1;
-                            if (cycle.Contains(instance))
-                            {
-                                return false;
-                            }
-                            if (duplicate.Contains(instance))
-                            {
-
-                            }
-                            else
-                            {
-                                cycle.Push(instance);
-                            }
-                        }
-                    }
-
-                    if (val.x > 0 && val.y < 18)
-                    {
-                        if (state[val.x - 1, val.y + 1] == 1 || state[val.x - 1, val.y + 1] == 2 || state[val.x - 1, val.y + 1] == 3)
-                        {
-                            instance.x = val.x - 1;
-                            instance.y = val.y + 1;
-                            if (cycle.Contains(instance))
-                            {
-                                return false;
-                            }
-                            if (duplicate.Contains(instance))
-                            {
-
-                            }
-                            else
-                            {
-                                cycle.Push(instance);
-                            }
-                        }
-                    }
-
-                    if (val.x > 0 && val.y > 0)
-                    {
-                        if (state[val.x - 1, val.y - 1] == 1 || state[val.x - 1, val.y - 1] == 2 || state[val.x - 1, val.y - 1] == 3)
-                        {
-                            instance.x = val.x - 1;
-                            instance.y = val.y - 1;
-                            if (cycle.Contains(instance))
-                            {
-                                return false;
-                            }
-                            if (duplicate.Contains(instance))
-                            {
-
-                            }
-                            else
-                            {
-                                cycle.Push(instance);
-                            }
-                        }
-                    }
-
-                }
-
-                else if ((val.x % 2) == 1) //val??x???W????????????
-                {
-                    if (val.x > 1)
-                    {
-                        if (state[val.x - 2, val.y] == 1 || state[val.x - 2, val.y] == 2 || state[val.x - 2, val.y] == 3)
-                        {
-                            instance.x = val.x - 2;
-                            instance.y = val.y;
-                            if (cycle.Contains(instance))
-                            {
-                                return false;
-                            }
-                            if (duplicate.Contains(instance))
-                            {
-
-                            }
-                            else
-                            {
-                                cycle.Push(instance);
-                            }
-
-                        }
-                    }
-
-                    if (val.x < 17)
-                    {
-                        if (state[val.x + 2, val.y] == 1 || state[val.x + 2, val.y] == 2 || state[val.x + 2, val.y] == 3)
-                        {
-                            instance.x = val.x + 2;
-                            instance.y = val.y;
-                            if (cycle.Contains(instance))
-                            {
-                                return false;
-                            }
-                            if (duplicate.Contains(instance))
-                            {
-
-                            }
-                            else
-                            {
-                                cycle.Push(instance);
-                            }
-                        }
-                    }
-
-                    if (val.x < 18 && val.y < 18)
-                    {
-                        if (state[val.x + 1, val.y + 1] == 1 || state[val.x + 1, val.y + 1] == 2 || state[val.x + 1, val.y + 1] == 3)
-                        {
-                            instance.x = val.x + 1;
-                            instance.y = val.y + 1;
-                            if (cycle.Contains(instance))
-                            {
-                                return false;
-                            }
-                            if (duplicate.Contains(instance))
-                            {
-
-                            }
-                            else
-                            {
-                                cycle.Push(instance);
-                            }
-                        }
-                    }
-
-                    if (val.x < 18 && val.y > 0)
-                    {
-                        if (state[val.x + 1, val.y - 1] == 1 || state[val.x + 1, val.y - 1] == 2 || state[val.x + 1, val.y - 1] == 3)
-                        {
-                            instance.x = val.x + 1;
-                            instance.y = val.y - 1;
-                            if (cycle.Contains(instance))
-                            {
-                                return false;
-                            }
-                            if (duplicate.Contains(instance))
-                            {
-
-                            }
-                            else
-                            {
-                                cycle.Push(instance);
-                            }
-                        }
-                    }
-
-                    if (val. x > 0 && val.y < 18)
-                    {
-                        if (state[val.x - 1, val.y + 1] == 1 || state[val.x - 1, val.y + 1] == 2 || state[val.x - 1, val.y + 1] == 3)
-                        {
-                            instance.x = val.x - 1;
-                            instance.y = val.y + 1;
-                            if (cycle.Contains(instance))
-                            {
-                                return false;
-                            }
-                            if (duplicate.Contains(instance))
-                            {
-
-                            }
-                            else
-                            {
-                                cycle.Push(instance);
-                            }
-                        }
-                    }
-
-                    if (val.x > 0 && val.y > 0)
-                    {
-                        if (state[val.x - 1, val.y - 1] == 1 || state[val.x - 1, val.y - 1] == 2 || state[val.x - 1, val.y - 1] == 3)
-                        {
-                            instance.x = val.x - 1;
-                            instance.y = val.y - 1;
-                            if (cycle.Contains(instance))
-                            {
-                                return false;
-                            }
-                            if (duplicate.Contains(instance))
-                            {
-
-                            }
-                            else
-                            {
-                                cycle.Push(instance);
-                            }
-                        }
-                    }
-
-                }
-
+            if(!existRoot(state, player1Position, treasurePosition))
+            {
+                return false;
+            }
+            if(!existRoot(state, player2Position, treasurePosition))
+            {
+                return false;
             }
 
             return true;
-
         }
 
         //int wallcount = 2;

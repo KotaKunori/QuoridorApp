@@ -23,7 +23,7 @@ namespace TreasureHunting
         public State getState()
         {
             State newState = new State();
-            newState.setState(statas.getState());
+            newState.setState((int[, ]) statas.getState().Clone());
             return newState;
         }
 

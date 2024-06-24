@@ -7,7 +7,7 @@ namespace TreasureHunting
 {
     public class LeftArrowButton : MonoBehaviour
     {
-        public View view;
+        View view;
 
         private void Start()
         {

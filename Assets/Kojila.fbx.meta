@@ -15,8 +15,7 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
-      human bone 'LeftLowerArm' not found\n"
+    rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
@@ -86,7 +85,7 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: Bone_L
+    - boneName: Bone_L.001
       humanName: LeftUpperLeg
       limit:
         min: {x: 0, y: 0, z: 0}
@@ -94,7 +93,7 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: Bone_R
+    - boneName: Bone_R.001
       humanName: RightUpperLeg
       limit:
         min: {x: 0, y: 0, z: 0}
@@ -102,7 +101,7 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: Bone_L.001
+    - boneName: Bone_L.002
       humanName: LeftLowerLeg
       limit:
         min: {x: 0, y: 0, z: 0}
@@ -110,7 +109,7 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: Bone_R.001
+    - boneName: Bone_R.002
       humanName: RightLowerLeg
       limit:
         min: {x: 0, y: 0, z: 0}
@@ -118,7 +117,7 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: Bone_L.002
+    - boneName: Bone_L.003
       humanName: LeftFoot
       limit:
         min: {x: 0, y: 0, z: 0}
@@ -126,7 +125,7 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: Bone_R.002
+    - boneName: Bone_R.003
       humanName: RightFoot
       limit:
         min: {x: 0, y: 0, z: 0}
@@ -158,7 +157,7 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: Bone.001_L.001
+    - boneName: Bone.001_L
       humanName: LeftShoulder
       limit:
         min: {x: 0, y: 0, z: 0}
@@ -174,7 +173,7 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: Bone.001_L.002
+    - boneName: Bone.001_L.001
       humanName: LeftUpperArm
       limit:
         min: {x: 0, y: 0, z: 0}
@@ -198,7 +197,7 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: Bone_L.003
+    - boneName: Bone_L.003_end
       humanName: LeftToes
       limit:
         min: {x: 0, y: 0, z: 0}
@@ -206,8 +205,32 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: Bone_R.003
+    - boneName: Bone_R.003_end
       humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Bone.001_R.002_end
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Bone.001_L.002_end
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Bone.001_L.002
+      humanName: LeftLowerArm
       limit:
         min: {x: 0, y: 0, z: 0}
         max: {x: 0, y: 0, z: 0}
@@ -222,7 +245,7 @@ ModelImporter:
       scale: {x: 1, y: 1, z: 1}
     - name: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2.001"
       parentName: Kojila(Clone)
-      position: {x: 0.021837354, y: 1.0570631, z: 0.043587625}
+      position: {x: 0, y: 1.0570631, z: 0.043587625}
       rotation: {x: -0.6405072, y: -1.4149229e-17, z: 1.4149227e-17, w: 0.76795214}
       scale: {x: 100, y: 100, z: 100}
     - name: Bone
@@ -238,17 +261,17 @@ ModelImporter:
     - name: Bone.001_L
       parentName: Bone.001
       position: {x: 1.323489e-25, y: 0.004831579, z: -7.4505804e-11}
-      rotation: {x: 0.47871995, y: -0.082977444, z: 0.7504481, w: 0.4480732}
+      rotation: {x: 0.3839985, y: -0.2088077, z: 0.69937885, w: 0.56552076}
       scale: {x: 0.9999998, y: 0.99999994, z: 0.9999999}
     - name: Bone.001_L.001
       parentName: Bone.001_L
       position: {x: 2.9802322e-10, y: 0.008877768, z: -8.9406965e-10}
-      rotation: {x: -0.14624321, y: -0.045649126, z: -0.25883177, w: 0.95369554}
+      rotation: {x: -0.15229167, y: -0.015515046, z: -0.062872715, w: 0.9862117}
       scale: {x: 0.9999999, y: 1, z: 1}
     - name: Bone.001_L.002
       parentName: Bone.001_L.001
       position: {x: -4.4703483e-10, y: 0.0018785807, z: 5.9604643e-10}
-      rotation: {x: 0.0042882366, y: 0.0059105475, z: -0.020828307, w: 0.9997564}
+      rotation: {x: 0.0032930076, y: 0.005881779, z: -0.009054774, w: 0.99993634}
       scale: {x: 1, y: 0.99999994, z: 0.99999994}
     - name: Bone.001_L.002_end
       parentName: Bone.001_L.002
@@ -258,17 +281,17 @@ ModelImporter:
     - name: Bone.001_R
       parentName: Bone.001
       position: {x: 1.323489e-25, y: 0.004831579, z: -7.4505804e-11}
-      rotation: {x: -0.47871995, y: -0.082977444, z: 0.7504481, w: -0.4480732}
+      rotation: {x: -0.3839985, y: -0.2088077, z: 0.69937885, w: -0.56552076}
       scale: {x: 0.9999998, y: 0.99999994, z: 0.9999999}
     - name: Bone.001_R.001
       parentName: Bone.001_R
       position: {x: -2.9802322e-10, y: 0.008877768, z: -8.9406965e-10}
-      rotation: {x: -0.14624321, y: 0.045649126, z: 0.25883177, w: 0.95369554}
+      rotation: {x: -0.15229167, y: 0.015515046, z: 0.062872715, w: 0.9862117}
       scale: {x: 0.9999999, y: 1, z: 1}
     - name: Bone.001_R.002
       parentName: Bone.001_R.001
       position: {x: 4.4703483e-10, y: 0.0018785807, z: 5.9604643e-10}
-      rotation: {x: 0.0042882366, y: -0.0059105475, z: 0.020828307, w: 0.9997564}
+      rotation: {x: 0.0032930076, y: -0.005881779, z: 0.009054774, w: 0.99993634}
       scale: {x: 1, y: 0.99999994, z: 0.99999994}
     - name: Bone.001_R.002_end
       parentName: Bone.001_R.002
@@ -323,7 +346,7 @@ ModelImporter:
     - name: Bone_L.001
       parentName: Bone_L
       position: {x: 5.3551046e-11, y: 0.008534779, z: 6.810296e-11}
-      rotation: {x: -0.54391795, y: 0.039261285, z: 0.016095104, w: 0.8380649}
+      rotation: {x: -0.564617, y: 0.045435484, z: 0.027261198, w: 0.82365054}
       scale: {x: 1, y: 0.9999999, z: 0.99999994}
     - name: Bone_L.002
       parentName: Bone_L.001
@@ -333,7 +356,7 @@ ModelImporter:
     - name: Bone_L.003
       parentName: Bone_L.002
       position: {x: 2.4214386e-10, y: 0.0026275557, z: -5.3085386e-10}
-      rotation: {x: -0.26080513, y: 0.03323132, z: 0.6006273, w: 0.755065}
+      rotation: {x: -0.24205907, y: 0.019142073, z: 0.59214747, w: 0.76837647}
       scale: {x: 0.9999999, y: 0.99999994, z: 0.9999999}
     - name: Bone_L.003_end
       parentName: Bone_L.003
@@ -348,7 +371,7 @@ ModelImporter:
     - name: Bone_R.001
       parentName: Bone_R
       position: {x: -5.3551046e-11, y: 0.008534779, z: 6.810296e-11}
-      rotation: {x: -0.54391795, y: -0.039261285, z: -0.016095104, w: 0.8380649}
+      rotation: {x: -0.564617, y: -0.045435484, z: -0.027261198, w: 0.82365054}
       scale: {x: 1, y: 0.9999999, z: 0.99999994}
     - name: Bone_R.002
       parentName: Bone_R.001
@@ -358,7 +381,7 @@ ModelImporter:
     - name: Bone_R.003
       parentName: Bone_R.002
       position: {x: -2.4214386e-10, y: 0.0026275557, z: -5.3085386e-10}
-      rotation: {x: -0.26080513, y: -0.03323132, z: -0.6006273, w: 0.755065}
+      rotation: {x: -0.24205907, y: -0.019142073, z: -0.59214747, w: 0.76837647}
       scale: {x: 0.9999999, y: 0.99999994, z: 0.9999999}
     - name: Bone_R.003_end
       parentName: Bone_R.003
@@ -368,7 +391,7 @@ ModelImporter:
     - name: "\u7403"
       parentName: Kojila(Clone)
       position: {x: -8.6736174e-17, y: 3.3043847, z: 0}
-      rotation: {x: 0.50000006, y: 0.49999994, z: 0.5, w: -0.49999997}
+      rotation: {x: 0.50000006, y: 0.49999997, z: 0.5, w: -0.5}
       scale: {x: 100, y: 100, z: 100}
     armTwist: 0.5
     foreArmTwist: 0.5

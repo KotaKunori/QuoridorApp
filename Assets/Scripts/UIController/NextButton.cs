@@ -6,7 +6,7 @@ namespace TreasureHunting
 {
     public class NextButton : MonoBehaviour
     {
-        public View view;
+        View view;
 
         private void Start()
         {

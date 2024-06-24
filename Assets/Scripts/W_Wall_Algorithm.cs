@@ -11,7 +11,7 @@ namespace TreasureHunting
         /// </summary>
         /// <param name="state">状態</param>
         /// <returns>壁の座標</returns>
-        public Wall getWallPosition(State state)
+        public override Wall getWallPosition(State state, Players myPlayer)
         {
             //以下はデバッグ用のコード
             Wall wall;

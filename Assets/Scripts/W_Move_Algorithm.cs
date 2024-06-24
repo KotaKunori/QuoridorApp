@@ -11,10 +11,8 @@ namespace TreasureHunting
         /// </summary>
         /// <param name="state">状態</param>
         /// <returns>行動</returns>
-        public MoveActions getAction(VisibleState state)
+        public override MoveActions getAction(VisibleState state, Players myPlayer)
         {
-            //以下はデバッグ用のコード()
-
             System.Random rand = new System.Random();
             int action = rand.Next(4);
             return (MoveActions)action;
